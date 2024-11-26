@@ -1,0 +1,42 @@
+states:
+  - greeting
+  - main_menu
+  - help
+  - checking_balance
+  - farewell
+
+transitions:
+  - from: greeting
+    to: main_menu
+    input: "hello"
+    response: "Welcome! How can I assist you today? (e.g., 'help', 'check balance', 'exit')"
+
+  - from: main_menu
+    to: help
+    input: "help"
+    response: "I can help you with the following: 'check balance', 'exit'."
+
+  - from: help
+    to: main_menu
+    input: "continue"
+    response: "Is there anything else I can do for you? (e.g., 'check balance', 'exit')"
+
+  - from: main_menu
+    to: checking_balance
+    input: "check balance"
+    response: "Let me check your balance... {balance}"
+
+  - from: checking_balance
+    to: main_menu
+    input: "continue"
+    response: "Is there anything else I can do for you? (e.g., 'check balance', 'exit')"
+
+  - from: main_menu
+    to: farewell
+    input: "exit"
+    response: "Thank you for using our service. Goodbye!"
+  
+  - from: help
+    to: farewell
+    input: "exit"
+    response: "Thank you for using our service. Goodbye!"
