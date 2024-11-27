@@ -1,0 +1,25 @@
+states:
+  - greeting
+  - custom_question
+  - farewell
+
+transitions:
+  - from: greeting
+    to: custom_question
+    input: "*"
+    response: "Hello! Ask me any question and I'll try to answer it."
+
+  - from: custom_question
+    to: custom_question
+    input: "What is your name?"
+    response: "I am a chatbot created to help you!"
+
+  - from: custom_question
+    to: custom_question
+    input: "How are you?"
+    response: "I'm doing great! How can I assist you today?"
+
+  - from: custom_question
+    to: farewell
+    input: "exit"
+    response: "Goodbye! Thank you for chatting."
