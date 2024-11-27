@@ -1,0 +1,26 @@
+states:
+  - greeting
+  - main_menu
+  - recharge_balance
+  - farewell
+
+transitions:
+  - from: greeting
+    to: main_menu
+    input: "*"
+    response: "Welcome! How can I assist you today? (e.g., 'recharge balance', 'exit')"
+
+  - from: main_menu
+    to: recharge_balance
+    input: "recharge balance"
+    response: "How much would you like to recharge?"
+
+  - from: recharge_balance
+    to: main_menu
+    input: "\\d+"
+    response: "You have successfully recharged {amount}."
+
+  - from: main_menu
+    to: farewell
+    input: "exit"
+    response: "Thank you for using our service. Goodbye!"
