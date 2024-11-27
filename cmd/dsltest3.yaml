@@ -1,0 +1,21 @@
+states:
+  - greeting
+  - help
+  - main_menu
+  - farewell
+
+transitions:
+  - from: greeting
+    to: help
+    input: "*"
+    response: "Welcome! I can help you with the following: 'check balance', 'recharge balance', 'exit'. Type 'help' to see options."
+
+  - from: help
+    to: main_menu
+    input: "help"
+    response: "Here are the things I can help with: 'check balance', 'recharge balance', 'exit'. What would you like to do?"
+
+  - from: main_menu
+    to: farewell
+    input: "exit"
+    response: "Thank you for using our service. Goodbye!"
