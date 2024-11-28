@@ -18,6 +18,9 @@ func (c *Controller) InitCtrl(db db.MyDB) {
 	c.U = UserController{
 		DB: db.UserDB,
 	}
+	c.C = ChatController{
+		DB: db.ChatDB,
+	}
 }
 
 func (c *Controller) LoadAll(e *gin.Engine) {

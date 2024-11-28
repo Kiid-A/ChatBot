@@ -8,7 +8,7 @@ states:
 transitions:
   - from: greeting
     to: main_menu
-    input: "hello"
+    input: "*"
     response: "Welcome! How can I assist you today? (e.g., 'help', 'check balance', 'exit')"
 
   - from: main_menu

@@ -11,3 +11,10 @@ type User struct {
 
 	Balance float64 `gorm:"column:balance;" json:"balance"`
 }
+
+type ChatMessage struct {
+	gorm.Model
+	UserId  string `gorm:"column:user_id;" json:"user_id"`
+	ChatId  string `gorm:"column:chat_id;" json:"chat_id"`
+	Content string `gorm:"column:content;" json:"content"`
+}

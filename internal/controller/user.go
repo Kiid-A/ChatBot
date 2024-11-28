@@ -68,19 +68,21 @@ func (uc *UserController) Modify(ctx *gin.Context) {
 
 func (uc *UserController) Login(ctx *gin.Context) {
 	uc.DB.Table("users")
-	username := ctx.Query("username")
-	passwd := ctx.Query("passwd")
+	var req model.User
+	if err := ctx.BindJSON(&req); err != nil {
+		return
+	}
 
-	fmt.Println("guest ", username, passwd)
+	fmt.Println("guest ", req.Username, req.Passwd)
 
 	var user model.User
-	uc.DB.Where("username = ?", username).First(&user)
+	uc.DB.Where("username = ?", req.Username).First(&user)
 	if user.ID != 0 {
 		ctx.JSON(500, gin.H{"error": "username already exist"})
 		return
 	}
 
-	if flag := strings.Compare(passwd, user.Passwd); flag != 0 {
+	if flag := strings.Compare(req.Passwd, user.Passwd); flag != 0 {
 		ctx.JSON(http.StatusUnprocessableEntity, gin.H{
 			"code":    422,
 			"message": "密码错误",
@@ -104,7 +106,7 @@ func (uc *UserController) Register(ctx *gin.Context) {
 		ctx.JSON(500, "cannot create user "+err.Error())
 		return
 	}
-	
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"code":    200,
 		"message": "register successfully",

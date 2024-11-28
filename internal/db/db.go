@@ -12,11 +12,9 @@ import (
 )
 
 type MyDB struct {
-	DB        *gorm.DB
-	UserDB    *gorm.DB
-	ArticleDB *gorm.DB
-	MapDB     *gorm.DB
-	RatingDB  *gorm.DB
+	DB     *gorm.DB
+	UserDB *gorm.DB
+	ChatDB *gorm.DB
 }
 
 func (db *MyDB) InitDB() {
@@ -35,7 +33,9 @@ func (db *MyDB) InitDB() {
 		panic("failed to connect database, err:" + err.Error())
 	}
 	db.DB = DB
-	db.DB.AutoMigrate(&model.User{})
 
 	db.UserDB = db.DB
+	db.UserDB.AutoMigrate(&model.User{})
+	db.ChatDB = db.DB
+	db.ChatDB.AutoMigrate(&model.ChatMessage{})
 }
