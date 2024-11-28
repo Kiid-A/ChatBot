@@ -1,3 +1,0 @@
-package chatbot
-
-func init()

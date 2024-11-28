@@ -21,7 +21,7 @@ type SysCmd interface {
 }
 
 func RunBot() error {
-	cmd := exec.Command("python3", "cmd/test.py")
+	cmd := exec.Command("python3", "cmd/chatbot.py")
 	if err := cmd.Start(); err != nil {
 		return fmt.Errorf("failed to start ChatBot: %w", err)
 	}
@@ -50,7 +50,8 @@ func AskBot(req model.ChatRequest) (model.ChatReply, error) {
 
 	fmt.Println(bytes.NewBuffer(jsonValue))
 
-	resp, err := http.Post("http://localhost:5000/chat", "application/json", bytes.NewBuffer(jsonValue))
+	resp, err := http.Post("http://localhost:5000/chat/"+req.UserId,
+		"application/json", bytes.NewBuffer(jsonValue))
 	if err != nil {
 		return model.ChatReply{}, err
 	}
